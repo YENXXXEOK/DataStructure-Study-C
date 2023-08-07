@@ -12,11 +12,11 @@ main()
 
 	for (int i = 0; i < 4; i++)
 	{
-		list[i].next = &list[i + 1];
 		list[i].nData = (i + 1) * 100;
+		list[i].next = &list[i + 1];
 	}
-	list[4].next = NULL;
 	list[4].nData = 500;
+	list[4].next = NULL;
 
 	for (int i = 0; i < 5; i++)
 		printf("[%d] %d\n",i,  list[i].nData);

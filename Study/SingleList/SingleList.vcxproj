@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{82638fe0-031d-44d7-b8a0-f1563c3467ad}</ProjectGuid>
-    <RootNamespace>SingleLinkedList</RootNamespace>
+    <ProjectGuid>{77789e82-d9d6-421e-870c-46e251c4bcf9}</ProjectGuid>
+    <RootNamespace>SingleList</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>0_SingleLinkedList_Sample</ProjectName>
+    <ProjectName>1_SingleList</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -129,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Structure.c" />
+    <ClCompile Include="SingleList.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

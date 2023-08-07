@@ -13,6 +13,11 @@ NODE*	g_pHead;
 NODE*	g_pTail;
 int		g_nSize;
 
+int InsertAtHead(const char* pszData);
+int InsertAtTail(const char* pszData);
+int GetLength();
+int InsertAtBefore(NODE* pDstNode, const char* pszData);
+
 void InitList()
 {
 	g_pHead = (NODE*)malloc(sizeof(NODE));

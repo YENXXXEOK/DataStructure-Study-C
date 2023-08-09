@@ -193,11 +193,9 @@ int InsertAtBefore(NODE* pDstNode, void* pParam)
 	return g_nSize;
 }
 
-NODE* FindNode(const char* pszKey)
+NODE* FindNode(const char* pszKey)//, const char* (*pfGetKey)(void*))
 {
 	NODE* pTmp = g_pHead->pNext;
-	// 구조체를 함수 포인터로 변경하려는 시도	
-	// USERDATA 구조체
 
 	// 함수 포인터
 	const char* (*pfGetKey)(void*) = NULL;
@@ -205,10 +203,10 @@ NODE* FindNode(const char* pszKey)
 	while (pTmp != g_pTail)
 	{
 		// 함수포인터에 pTmp->pData 대입
-		pfGetKey = pTmp->pData;
+		pfGetKey = GetKeyFromUserData;//(*(const char* (**)(void*))(pTmp->pData));
 		
 		// 함수포인터 
-		if (strcmp((*(const char* (**)(void*))pfGetKey)(pTmp->pData), pszKey) == 0)
+		if (strcmp(pfGetKey(pTmp->pData), pszKey) == 0)
 			return pTmp;
 		 
 		pTmp = pTmp->pNext;
@@ -216,22 +214,20 @@ NODE* FindNode(const char* pszKey)
 	return NULL;
 }
 
-int DeleteNode(const char* pszKey)
+int DeleteNode(const char* pszKey, const char* (*pfGetKey)(void*))
 {
-	NODE* pNode = FindNode(pszKey);
+	NODE* pNode = FindNode(pszKey, pfGetKey);
 	//const char* (*pfGetKey)(void*) = NULL;
 	//pfGetKey = pNode->pData;
 
 	if (pNode != NULL)
 	{
-		USERDATA* pUser = pNode->pData;
-
 		pNode->pPrev->pNext = pNode->pNext;
 		pNode->pNext->pPrev = pNode->pPrev;
 
 		g_nSize--;
 		printf("DeleteNode() \n");
-		printf("[0x%p][0x%p\t %s\t][0x%p]\n", pNode->pPrev, pNode, pUser->pfGetKey(pNode->pData), pNode->pNext);
+		printf("[0x%p][0x%p\t %s\t][0x%p]\n", pNode->pPrev, pNode, pfGetKey(pNode->pData), pNode->pNext);
 		printf("\n");
 
 		free(pNode->pData);
@@ -268,7 +264,7 @@ void main()
 
 	PrintList();
 
-	DeleteNode("etwer");
+	DeleteNode("etwer", GetKeyFromUserData);
 
 	ReleaseList();
 	return;

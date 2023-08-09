@@ -135,8 +135,8 @@ NODE* FindNode(LIST_INFO* pListData, const char* pszKey)
 
 	while (pTmp != pListData->pTail)
 	{
-		pfGetKey = pTmp->pData;
-		if (strcmp((*(const char* (**)(void*))pfGetKey)(pTmp->pData), pszKey) == 0)
+		pfGetKey = (*(const char* (**)(void*))pTmp->pData);
+		if (strcmp(pfGetKey(pTmp->pData), pszKey) == 0)
 			return pTmp;
 
 		pTmp = pTmp->pNext;
